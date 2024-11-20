@@ -1,7 +1,11 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'uasbdl');
-// if (!$conn) {
-//     echo "Koneksi Gagal";
-// } else {
-//     echo "Koneksi Berhasil";
-// }
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "uasbdl";
+
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}

@@ -180,18 +180,13 @@ include 'query.php'
                                 </tfoot>
                                 <tbody>
                                     <?php
-                                    // Menambahkan logika untuk filter berdasarkan kategori yang dipilih
                                     $categoryFilter = isset($_GET['category']) && $_GET['category'] != 'all' ? $_GET['category'] : '';
 
-                                    // Jika kategori dipilih, filter produk
                                     if ($categoryFilter) {
                                         $queryProducts .= " WHERE c.category_name = '$categoryFilter'";
                                     }
 
-                                    // Menjalankan query produk
                                     $showProducts = $conn->query($queryProducts);
-
-                                    // Menampilkan produk berdasarkan query
                                     while ($row = $showProducts->fetch_assoc()):
                                     ?>
                                         <tr>

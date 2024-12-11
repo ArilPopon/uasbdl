@@ -14,7 +14,7 @@ include 'query.php'
         content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard | Products</title>
+    <title>Dashboard | Suppliers</title>
     <link
         href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
         rel="stylesheet" />
@@ -43,12 +43,13 @@ include 'query.php'
                         </a>
                         <div class="sb-sidenav-menu-heading">Menu</div>
                         <a
-                            class="nav-link active"
+                            class="nav-link"
                             href="products.php">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-boxes-stacked"></i>
                             </div>
-                            Products
+                            Clients
+
                         </a><a
                             class="nav-link"
                             href="transactions.php">
@@ -66,7 +67,7 @@ include 'query.php'
                             Clients
                         </a>
                         <a
-                            class="nav-link"
+                            class="nav-link active"
                             href="suppliers.php">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-truck-field"></i>
@@ -80,84 +81,53 @@ include 'query.php'
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Products</h1>
+                    <h1 class="mt-4">Clients</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item">
                             <a href="index.html">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item active">Products</li>
+                        <li class="breadcrumb-item active">Suppliers</li>
                     </ol>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            Data Products
+                            Data Suppliers
                         </div>
                         <div class="card-body">
                             <form method="GET">
-                                <div class="mb-3 d-flex flex-wrap align-items-center gap-3">
-                                    <div class="d-flex align-items-center">
-                                        <label for="categoryFilter" class="form-label me-2 mb-0">Filter by Category:</label>
-                                        <select id="categoryFilter" name="category" onchange="this.form.submit()" class="form-select w-auto">
-                                            <option value="all">All</option>
-                                            <?php while ($category = $showCategories->fetch_assoc()): ?>
-                                                <option value="<?php echo $category['category_name']; ?>"
-                                                    <?php echo (isset($_GET['category']) && $_GET['category'] == $category['category_name']) ? 'selected' : ''; ?>>
-                                                    <?php echo $category['category_name']; ?>
-                                                </option>
-                                            <?php endwhile; ?>
-                                        </select>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <label for="priceRange" class="form-label me-2 mb-0">Price Range:</label>
-                                        <input type="text" class="form-control w-auto" placeholder="Harga Minimal">
-                                        <input type="text" class="form-control w-auto ms-2" placeholder="Harga Maksimal">
-                                    </div>
-                                    <button type="button" class="btn btn-primary">Apply</button>
-                                </div>
-
-
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
-                                            <th>Nama</th>
-                                            <th>Kategori</th>
-                                            <th>Merek</th>
-                                            <th>Tipe</th>
-                                            <th>Harga</th>
-                                            <th>Stok</th>
+                                            <th>ID</th>
+                                            <th>Nama Perusahaan</th>
+                                            <th>Kontak</th>
+                                            <th>No Telepon</th>
+                                            <th>Email</th>
+                                            <th>Alamat</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Id</th>
-                                            <th>Nama</th>
-                                            <th>Kategori</th>
-                                            <th>Merek</th>
-                                            <th>Tipe</th>
-                                            <th>Harga</th>
-                                            <th>Stok</th>
+                                            <th>ID</th>
+                                            <th>Nama Perusahaan</th>
+                                            <th>Kontak</th>
+                                            <th>No Telepon</th>
+                                            <th>Email</th>
+                                            <th>Alamat</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <?php
-                                        $categoryFilter = isset($_GET['category']) && $_GET['category'] != 'all' ? $_GET['category'] : '';
-
-                                        if ($categoryFilter) {
-                                            $queryProducts .= " WHERE c.category_name = '$categoryFilter'";
-                                        }
-
-                                        $showProducts = $conn->query($queryProducts);
-                                        while ($row = $showProducts->fetch_assoc()):
+                                        $showSuppliers = $conn->query($querySuppliers);
+                                        while ($row = $showSuppliers->fetch_assoc()):
                                         ?>
                                             <tr>
-                                                <td><?php echo $row['product_id']; ?></td>
+                                                <td><?php echo $row['supplier_id']; ?></td>
                                                 <td><?php echo $row['name']; ?></td>
-                                                <td><?php echo $row['category_name']; ?></td>
-                                                <td><?php echo $row['brand']; ?></td>
-                                                <td><?php echo $row['model_number']; ?></td>
-                                                <td><?php echo $row['price']; ?></td>
-                                                <td><?php echo $row['stock_quantity']; ?></td>
+                                                <td><?php echo $row['contact_person']; ?></td>
+                                                <td><?php echo $row['phone']; ?></td>
+                                                <td><?php echo $row['email']; ?></td>
+                                                <td><?php echo $row['address']; ?></td>
                                             </tr>
                                         <?php endwhile; ?>
                                     </tbody>

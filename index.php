@@ -48,20 +48,30 @@ include 'query.php'
                                 <i class="fas fa-boxes-stacked"></i>
                             </div>
                             Products
-                        </a><a
+                        </a>
+                        <a
                             class="nav-link"
-                            href="#">
+                            href="transactions.php">
                             <div class="sb-nav-link-icon">
-                                <i class="fas fa-boxes-stacked"></i>
+                                <i class="fas fa-money-bill-transfer"></i>
                             </div>
-                            Apa
-                        </a><a
+                            Transactions
+                        </a>
+                        <a
                             class="nav-link"
-                            href="#">
+                            href="clients.php">
                             <div class="sb-nav-link-icon">
-                                <i class="fas fa-boxes-stacked"></i>
+                                <i class="fas fa-user"></i>
                             </div>
-                            Apa
+                            Clients
+                        </a>
+                        <a
+                            class="nav-link"
+                            href="suppliers.php">
+                            <div class="sb-nav-link-icon">
+                                <i class="fas fa-truck-field"></i>
+                            </div>
+                            Suppliers
                         </a>
                     </div>
                 </div>
@@ -79,10 +89,15 @@ include 'query.php'
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">Total Barang</div>
                                 <div
-                                    class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="#">View Details</a>
-                                    <div class="small text-white">
-                                        <i class="fas fa-angle-right"></i>
+                                    class="card-footer align-items-center justify-content-between">
+                                    <div class="d-flex">
+                                        <span class="small"><?php echo $queryCountProducts; ?></span>
+                                        <div class="d-flex ms-auto">
+                                            <a class="small text-white stretched-link" href="products.php">View Details</a>
+                                            <div class="small text-white">
+                                                <i class="ms-1 fas fa-angle-right"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

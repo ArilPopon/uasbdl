@@ -2,6 +2,7 @@
 include 'koneksi.php';
 include 'query.php'
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +23,6 @@ include 'query.php'
         src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
         crossorigin="anonymous"></script>
 </head>
-
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
@@ -152,9 +152,8 @@ include 'query.php'
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            Data Products
-                        </div>
-                        <div class="card-body">
+                            Barang Terlaris
+                            <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
@@ -165,6 +164,7 @@ include 'query.php'
                                         <th>Tipe</th>
                                         <th>Harga</th>
                                         <th>Stok</th>
+                                        <th>Total Terjual</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -176,6 +176,7 @@ include 'query.php'
                                         <th>Tipe</th>
                                         <th>Harga</th>
                                         <th>Stok</th>
+                                        <th>Total Terjual</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -186,8 +187,7 @@ include 'query.php'
                                         $queryProducts .= " WHERE c.category_name = '$categoryFilter'";
                                     }
 
-                                    $showProducts = $conn->query($queryProducts);
-                                    while ($row = $showProducts->fetch_assoc()):
+                                    while ($row = $showProductsTerlaris->fetch_assoc()):
                                     ?>
                                         <tr>
                                             <td><?php echo $row['product_id']; ?></td>
@@ -197,13 +197,14 @@ include 'query.php'
                                             <td><?php echo $row['model_number']; ?></td>
                                             <td><?php echo $row['price']; ?></td>
                                             <td><?php echo $row['stock_quantity']; ?></td>
+                                            <td><?php echo $row['total_sold_stock']; ?></td>
                                         </tr>
                                     <?php endwhile; ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                </div>
+                </div>      
             </main>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">

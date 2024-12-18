@@ -6,6 +6,20 @@ FROM Products p
 INNER JOIN Categories c ON p.category = c.category_id
 ";
 
+$queryProductsTerlaris = "SELECT p.product_id, p.name, c.category_name, p.brand, p.model_number, p.price, p.stock_quantity,
+       (SELECT SUM(t.quantity) FROM Transactions t WHERE t.transaction_type = 'OUT' AND t.product_id = p.product_id) AS total_sold_stock
+FROM Products p
+INNER JOIN Categories c ON p.category = c.category_id
+WHERE p.product_id IN (
+    SELECT t.product_id FROM Transactions t
+    WHERE t.transaction_type = 'OUT'
+    GROUP BY t.product_id
+    HAVING AVG(t.quantity) > (
+        SELECT AVG(quantity) FROM Transactions WHERE transaction_type = 'OUT'
+    )
+)";
+
+
 // Categories
 $queryCategories = "SELECT DISTINCT category_name FROM categories";
 
@@ -60,8 +74,9 @@ $queryClients = "SELECT * FROM clients";
 $querySuppliers = "SELECT * FROM suppliers";
 
 $showProducts = $conn->query($queryProducts);
+$showProductsTerlaris = $conn->query($queryProductsTerlaris);
 $showCategories = $conn->query($queryCategories);
 $showTransactions = $conn->query($queryTransactions);
 $showClients = $conn->query($queryClients);
 $showSuppliers = $conn->query($querySuppliers);
-$showOmset = mysqli_query($conn, $queryOmset) ->fetch_assoc();
+$showOmset = $conn->query($queryOmset)->fetch_assoc();

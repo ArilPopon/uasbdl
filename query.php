@@ -9,6 +9,16 @@ INNER JOIN Categories c ON p.category = c.category_id
 // Categories
 $queryCategories = "SELECT DISTINCT category_name FROM categories";
 
+// Range bro
+
+$minimum = isset($_POST['min_price']) ? (int)$_POST['min_price'] : 0;
+$maximum = isset($_POST['max_price']) ? (int)$_POST['max_price'] : 0;
+$queryRange = "SELECT p.product_id, p.name, c.category_name, p.brand, p.model_number, p.price, p.stock_quantity
+FROM Products p
+INNER JOIN Categories c ON p.category = c.category_id
+WHERE p.price BETWEEN $minimum AND $maximum";
+
+
 // Transactions
 $queryTransactions = "SELECT 
     t.transaction_id, 

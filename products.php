@@ -109,10 +109,10 @@ include 'query.php'
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <label for="priceRange" class="form-label me-2 mb-0">Price Range:</label>
-                                        <input type="text" class="form-control w-auto" placeholder="Harga Minimal">
-                                        <input type="text" class="form-control w-auto ms-2" placeholder="Harga Maksimal">
+                                        <input type="number" name="min_price" class="form-control w-auto" placeholder="Harga Minimal" value="<?php echo $minPrice; ?>">
+                                        <input type="number" name="max_price" class="form-control w-auto ms-2" placeholder="Harga Maksimal" value="<?php echo $maxPrice; ?>">
                                     </div>
-                                    <button type="button" class="btn btn-primary">Apply</button>
+                                    <button type="submit" class="btn btn-primary">Apply</button>
                                 </div>
 
 
@@ -142,7 +142,14 @@ include 'query.php'
                                     <tbody>
                                         <?php
                                         $categoryFilter = isset($_GET['category']) && $_GET['category'] != 'all' ? $_GET['category'] : '';
+                                        $minPrice = isset($_GET['min_price']) ? (int)$_GET['min_price'] : 0;
+                                        $maxPrice = isset($_GET['max_price']) ? (int)$_GET['max_price'] : 0;
 
+                                        if ($minPrice && $maxPrice) {
+                                            $queryProducts .= $categoryFilter ? " AND" : " WHERE";
+                                            $queryProducts .= " p.price BETWEEN $minPrice AND $maxPrice";
+                                        }
+                                        
                                         if ($categoryFilter) {
                                             $queryProducts .= " WHERE c.category_name = '$categoryFilter'";
                                         }

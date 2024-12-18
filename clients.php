@@ -48,7 +48,7 @@ include 'query.php'
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-boxes-stacked"></i>
                             </div>
-                            Clients
+                            Products
 
                         </a><a
                             class="nav-link"

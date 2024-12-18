@@ -113,6 +113,7 @@ include 'query.php'
                                         <input type="number" name="max_price" class="form-control w-auto ms-2" placeholder="Harga Maksimal" value="<?php echo $maxPrice; ?>">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Apply</button>
+                                    <a href="addProducts.php" class="btn btn-success ms-auto">Tambahkan</a>
                                 </div>
 
 
@@ -126,6 +127,7 @@ include 'query.php'
                                             <th>Tipe</th>
                                             <th>Harga</th>
                                             <th>Stok</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -137,6 +139,7 @@ include 'query.php'
                                             <th>Tipe</th>
                                             <th>Harga</th>
                                             <th>Stok</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -149,7 +152,7 @@ include 'query.php'
                                             $queryProducts .= $categoryFilter ? " AND" : " WHERE";
                                             $queryProducts .= " p.price BETWEEN $minPrice AND $maxPrice";
                                         }
-                                        
+
                                         if ($categoryFilter) {
                                             $queryProducts .= " WHERE c.category_name = '$categoryFilter'";
                                         }
@@ -165,6 +168,10 @@ include 'query.php'
                                                 <td><?php echo $row['model_number']; ?></td>
                                                 <td><?php echo $row['price']; ?></td>
                                                 <td><?php echo $row['stock_quantity']; ?></td>
+                                                <td>
+                                                    <a href="editProducts.php?id=<?php echo $row['product_id']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                                                    <a href="deleteProducts.php?id=<?php echo $row['product_id']; ?>" class="btn btn-danger btn-sm" onclick="return confirmDelete()">Delete</a>
+                                                </td>
                                             </tr>
                                         <?php endwhile; ?>
                                     </tbody>
@@ -190,6 +197,8 @@ include 'query.php'
             </footer>
         </div>
     </div>
+
+
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
@@ -198,6 +207,7 @@ include 'query.php'
         src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
         crossorigin="anonymous"></script>
     <script src="js/datatables-simple-demo.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 
 </html>

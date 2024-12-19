@@ -112,7 +112,7 @@ include 'query.php'
                                         <input type="number" name="min_price" class="form-control w-auto" placeholder="Harga Minimal" value="<?php echo $minPrice; ?>">
                                         <input type="number" name="max_price" class="form-control w-auto ms-2" placeholder="Harga Maksimal" value="<?php echo $maxPrice; ?>">
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Apply</button>
+                                    <button type="submit" class="btn btn-primary">Terapkan</button>
                                     <a href="addProducts.php" class="btn btn-success ms-auto">Tambahkan</a>
                                 </div>
 
@@ -170,7 +170,7 @@ include 'query.php'
                                                 <td><?php echo $row['stock_quantity']; ?></td>
                                                 <td>
                                                     <a href="editProducts.php?id=<?php echo $row['product_id']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                                                    <a href="deleteProducts.php?id=<?php echo $row['product_id']; ?>" class="btn btn-danger btn-sm" onclick="return confirmDelete()">Delete</a>
+                                                    <a href="deleteProducts.php?id=<?php echo $row['product_id']; ?>" class="btn btn-danger btn-sm">Keluarkan</a>
                                                 </td>
                                             </tr>
                                         <?php endwhile; ?>
@@ -182,7 +182,7 @@ include 'query.php'
                     </div>
                 </div>
             </main>
-            <footer class="py-4 bg-light mt-auto">
+            <footer class=" py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div
                         class="d-flex align-items-center justify-content-between small">

@@ -39,13 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                              VALUES ('$productId', '$transactionType', '$deleteQuantity', '$transactionDate', '$clientId')";
 
         if ($conn->query($transactionQuery) === TRUE) {
-            // Jika stok menjadi 0, hapus produk
+            // Jika stok menjadi 0, hanya update status produk
             if ($newStock == 0) {
-                $deleteQuery = "DELETE FROM products WHERE product_id = $productId";
-                if ($conn->query($deleteQuery) === TRUE) {
-                    echo "<script>alert('Produk berhasil dihapus sepenuhnya'); window.location = 'products.php';</script>";
+                $updateQuery = "UPDATE products SET stock_quantity = 0 WHERE product_id = $productId";
+                if ($conn->query($updateQuery) === TRUE) {
+                    echo "<script>alert('Produk sudah habis stoknya dan statusnya diperbarui menjadi tidak tersedia.'); window.location = 'products.php';</script>";
                 } else {
-                    echo "<script>alert('Kesalahan saat menghapus produk: " . $conn->error . "');</script>";
+                    echo "<script>alert('Kesalahan saat memperbarui stok: " . $conn->error . "');</script>";
                 }
             } else {
                 // Update stok produk
@@ -175,17 +175,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </main>
         </div>
     </div>
-
-    <script>
-        // Validasi jumlah stok yang dihapus
-        document.getElementById('delete_quantity').addEventListener('input', function() {
-            const maxStock = parseInt(document.getElementById('stock_quantity').value, 10);
-            if (this.value > maxStock) {
-                alert('Jumlah yang dihapus tidak boleh lebih besar dari stok saat ini.');
-                this.value = maxStock;
-            }
-        });
-    </script>
 </body>
 
 </html>

@@ -27,7 +27,7 @@ include 'query.php'
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">Data Gudang</a>
+        <a class="navbar-brand ps-3 fw-bold" href="index.php">PT. RUNGKUT ELECTRONICS</a>
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -84,7 +84,7 @@ include 'query.php'
                     <h1 class="mt-4">Clients</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item">
-                            <a href="index.html">Dashboard</a>
+                            <a href="index.php">Dashboard</a>
                         </li>
                         <li class="breadcrumb-item active">Clients</li>
                     </ol>
@@ -163,4 +163,4 @@ include 'query.php'
     <script src="js/datatables-simple-demo.js"></script>
 </body>
 
-</html>
+</html>a

@@ -25,3 +25,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
     });
   }
 });
+
+// Validasi jumlah stok yang dihapus
+document
+  .getElementById("delete_quantity")
+  .addEventListener("input", function () {
+    const maxStock = parseInt(
+      document.getElementById("stock_quantity").value,
+      10
+    );
+    if (this.value > maxStock) {
+      alert("Jumlah yang dihapus tidak boleh lebih besar dari stok saat ini.");
+      this.value = maxStock;
+    }
+  });

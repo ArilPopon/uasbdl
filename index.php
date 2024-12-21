@@ -2,7 +2,6 @@
 include 'koneksi.php';
 include 'query.php'
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,10 +22,11 @@ include 'query.php'
         src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
         crossorigin="anonymous"></script>
 </head>
+
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3 fw-bold" href="index.php">PT. RUNGKUT ELECTRONICS</a>
+        <a class="navbar-brand ps-3" href="index.html">Data Gudang</a>
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -91,7 +91,7 @@ include 'query.php'
                                 <div
                                     class="card-footer align-items-center justify-content-between">
                                     <div class="d-flex">
-                                        <span class="small"><?php echo $countProducts['COUNT(*)']; ?></span>
+                                        <span class="small"><?php echo $queryCountProducts; ?></span>
                                         <div class="d-flex ms-auto">
                                             <a class="small text-white stretched-link" href="products.php">View Details</a>
                                             <div class="small text-white">
@@ -103,57 +103,73 @@ include 'query.php'
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
-                        <div class="card bg-warning text-white mb-4">
-                                <div class="card-body">Omset</div>
+                            <div class="card bg-warning text-white mb-4">
+                                <div class="card-body">Total Barang</div>
                                 <div
-                                    class="card-footer align-items-center justify-content-between">
-                                    <div class="d-flex">
-                                        <span class="small"><?php echo "Rp. " . $showOmset['total_omset']; ?></span>
+                                    class="card-footer d-flex align-items-center justify-content-between">
+                                    <a class="small text-white stretched-link" href="#">View Details</a>
+                                    <div class="small text-white">
+                                        <i class="fas fa-angle-right"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-success text-white mb-4">
-                                <div class="card-body">Total Barang Masuk</div>
+                                <div class="card-body">Total Barang</div>
                                 <div
-                                    class="card-footer align-items-center justify-content-between">
-                                    <div class="d-flex">
-                                        <span class="small"><?php echo $countTransactionsIn['COUNT(*)']; ?></span>
-                                        <div class="d-flex ms-auto">
-                                            <a class="small text-white stretched-link" href="products.php">View Details</a>
-                                            <div class="small text-white">
-                                                <i class="ms-1 fas fa-angle-right"></i>
-                                            </div>
-                                        </div>
+                                    class="card-footer d-flex align-items-center justify-content-between">
+                                    <a class="small text-white stretched-link" href="#">View Details</a>
+                                    <div class="small text-white">
+                                        <i class="fas fa-angle-right"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-danger text-white mb-4">
-                                <div class="card-body">Total Barang Keluar</div>
+                                <div class="card-body">Total Barang
+                                </div>
                                 <div
-                                    class="card-footer align-items-center justify-content-between">
-                                    <div class="d-flex">
-                                        <span class="small"><?php echo $countTransactionsOut['COUNT(*)']; ?></span>
-                                        <div class="d-flex ms-auto">
-                                            <a class="small text-white stretched-link" href="products.php">View Details</a>
-                                            <div class="small text-white">
-                                                <i class="ms-1 fas fa-angle-right"></i>
-                                            </div>
-                                        </div>
+                                    class="card-footer d-flex align-items-center justify-content-between">
+                                    <a class="small text-white stretched-link" href="#">View Details</a>
+                                    <div class="small text-white">
+                                        <i class="fas fa-angle-right"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-area me-1"></i>
+                                    Area Chart Example
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myAreaChart" width="100%" height="40"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-bar me-1"></i>
+                                    Bar Chart Example
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myBarChart" width="100%" height="40"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
-                            Barang Terlaris
-                            <div class="card-body">
+                            Data Products
+                        </div>
+                        <div class="card-body">
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
@@ -164,7 +180,6 @@ include 'query.php'
                                         <th>Tipe</th>
                                         <th>Harga</th>
                                         <th>Stok</th>
-                                        <th>Total Terjual</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -176,7 +191,6 @@ include 'query.php'
                                         <th>Tipe</th>
                                         <th>Harga</th>
                                         <th>Stok</th>
-                                        <th>Total Terjual</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -187,7 +201,8 @@ include 'query.php'
                                         $queryProducts .= " WHERE c.category_name = '$categoryFilter'";
                                     }
 
-                                    while ($row = $showProductsTerlaris->fetch_assoc()):
+                                    $showProducts = $conn->query($queryProducts);
+                                    while ($row = $showProducts->fetch_assoc()):
                                     ?>
                                         <tr>
                                             <td><?php echo $row['product_id']; ?></td>
@@ -197,20 +212,19 @@ include 'query.php'
                                             <td><?php echo $row['model_number']; ?></td>
                                             <td><?php echo $row['price']; ?></td>
                                             <td><?php echo $row['stock_quantity']; ?></td>
-                                            <td><?php echo $row['total_sold_stock']; ?></td>
                                         </tr>
                                     <?php endwhile; ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                </div>      
+                </div>
             </main>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div
                         class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Icikiwir 2024</div>
+                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
                         <div>
                             <a href="#">Privacy Policy</a>
                             &middot;
